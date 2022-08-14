@@ -34,6 +34,21 @@ function IsAmmunationOpen()
 	return (string.find(tostring(JayMenu.CurrentMenu() or ""), "xnweapons") or string.find(tostring(JayMenu.CurrentMenu() or ""), "xnw_"))
 end
 
+-- all the weapons not yet added
+	-- "RAYPISTOL",
+	-- "RAYCARBINE",
+	-- "RAYMINIGUN",
+	-- "CERAMICPISTOL",
+	-- "HAZARDCAN",
+	-- "NAVYREVOLVER",
+	-- "COMBATSHOTGUN",
+	-- "GADGETPISTOL",
+	-- "MILITARYRIFLE",
+	-- "RAILGUN",
+	-- "HEAVYRIFLE",
+	-- "PRECISIONRIFLE",
+	-- "TACTICALRIFLE",
+
 local globalWeaponTable = {
     {
         name = "Melee",
@@ -67,6 +82,7 @@ local globalWeaponTable = {
         { 'WEAPON_REVOLVER', 'Revolver' },
         { 'WEAPON_REVOLVER_MK2', 'Revolver MKII' },
         { 'WEAPON_VINTAGEPISTOL', 'Vintage Pistol' },
+		{ 'WEAPON_CERAMICPISTOL', 'Ceramic Pistol' },
         { 'WEAPON_SNSPISTOL', 'SNS Pistol' },
         { 'WEAPON_SNSPISTOL_MK2', 'SNS Pistol MKII' },
         { 'WEAPON_MARKSMANPISTOL', 'Marksman Pistol' },
@@ -99,6 +115,7 @@ local globalWeaponTable = {
         { 'WEAPON_SAWNOFFSHOTGUN', 'Sawn-off Shotgun' },
         { 'WEAPON_ASSAULTSHOTGUN', 'Assault Shotgun' },
         { 'WEAPON_BULLPUPSHOTGUN', 'Bullpup Shotgun' },
+		{ 'WEAPON_COMBATSHOTGUN', 'Combat Shotgun' },
         { 'WEAPON_AUTOSHOTGUN', 'Sweeper' },
         { 'WEAPON_DBSHOTGUN', 'Double-Barreled Shotgun' },
         { 'WEAPON_MUSKET', 'Musket' },
@@ -115,6 +132,9 @@ local globalWeaponTable = {
         { 'WEAPON_SPECIALCARBINE_MK2', 'Special Carbine MKII' },
         { 'WEAPON_BULLPUPRIFLE', 'Bullpup Rifle' },
         { 'WEAPON_BULLPUPRIFLE_MK2', 'Bullpup Rifle MKII' },
+		{ 'WEAPON_MILITARYRIFLE', 'Military Rifle' },
+		{ 'WEAPON_HEAVYRIFLE', 'Heavy Rifle' },
+		{ 'WEAPON_TACTICALRIFLE', 'Service Carbine' },
     },
     {
         name = "Sniper Rifles",
@@ -123,6 +143,7 @@ local globalWeaponTable = {
         { 'WEAPON_HEAVYSNIPER_MK2', 'Heavy Sniper Rifle MKII' },
         { 'WEAPON_MARKSMANRIFLE', 'Marksman Rifle' },
         { 'WEAPON_MARKSMANRIFLE_MK2', 'Marksman Rifle MKII' },
+        { 'WEAPON_PRECISIONRIFLE', 'Precision Rifle' },
     },
     {
         name = "Special Weapons",
@@ -132,6 +153,7 @@ local globalWeaponTable = {
         { 'WEAPON_HOMINGLAUNCHER', 'Homing Launcher' },
         { 'WEAPON_MINIGUN', 'Minigun' },
         { 'WEAPON_RAILGUN', 'Railgun' },
+		{ 'WEAPON_MUSKET', 'Musket' },
     },
     {
         name = "Throwables",
@@ -145,7 +167,7 @@ local globalWeaponTable = {
     },
     {
         name = "Accessories",
-        { 'WEAPON_FIREEXTINGUISHER', 'Fire Extinguisher', {noAmmo = true, noTint = true} },
+        -- { 'WEAPON_FIREEXTINGUISHER', 'Fire Extinguisher', {noAmmo = true, noTint = true} },
         { 'WEAPON_FIREWORK', 'Firework Launcher', {noTint = true} },
         { 'WEAPON_PETROLCAN', 'Jerry Can', {noTint = true} },
 		{ 'WEAPON_FLARE', 'Flare', {noTint = true} },
@@ -209,6 +231,7 @@ local globalAttachmentTable = {
 	{ "COMPONENT_MARKSMANRIFLE_CLIP_02", "Extended Magazine" },
 	{ "COMPONENT_SMG_CLIP_02", "Extended Magazine" },
 	{ "COMPONENT_SPECIALCARBINE_CLIP_02", "Extended Magazine" },
+	{ "COMPONENT_TACTICALRIFLE_CLIP_02", "Extended Magazine" },
 
 	{ "COMPONENT_SPECIALCARBINE_CLIP_03", "Drum Magazine" },
 	{ "COMPONENT_COMPACTRIFLE_CLIP_03", "Drum Magazine" },
@@ -285,6 +308,7 @@ local globalAttachmentTable = {
 	{ "COMPONENT_AT_PI_FLSH", "Flashlight" },
 	{ "COMPONENT_AT_AR_FLSH", "Flashlight" },
 	{ "COMPONENT_AT_PI_FLSH_03", "Flashlight" },
+	{ "COMPONENT_AT_AR_FLSH_REH", "Flashlight" },
 
 	{ "COMPONENT_AT_PI_SUPP", "Suppressor" },
 	{ "COMPONENT_AT_PI_SUPP_02", "Suppressor" },
