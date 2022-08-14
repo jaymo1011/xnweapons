@@ -1,17 +1,17 @@
 local xnWeapons = xnWeapons or {
-    interiorIDs = {
-        [153857] = true,
-        [200961] = true,
+	interiorIDs = {
+		[153857] = true,
+		[200961] = true,
 		[140289] = {
 			weaponRotationOffset = 135.0,
 		},
-        [180481] = true,
-        [168193] = true,
-        [164609] = {
+		[180481] = true,
+		[168193] = true,
+		[164609] = {
 			weaponRotationOffset = 150.0,
 		},
-        [175617] = true,
-        [176385] = true,
+		[175617] = true,
+		[176385] = true,
 		[178689] = true,
 		[137729] = {
 			additionalOffset = 			vec(8.3,-6.5,0.0),
@@ -26,9 +26,9 @@ local xnWeapons = xnWeapons or {
 			additionalCameraPoint = 	vec(-1.0,0.4,0.0),
 			additionalWeaponOffset =	vec(0.4,0.0,0.0),
 		},
-    },
-    closeMenuNextFrame = false,
-    weaponClasses = {},
+	},
+	closeMenuNextFrame = false,
+	weaponClasses = {},
 }
 function IsAmmunationOpen()
 	return (string.find(tostring(JayMenu.CurrentMenu() or ""), "xnweapons") or string.find(tostring(JayMenu.CurrentMenu() or ""), "xnw_"))
@@ -50,129 +50,129 @@ end
 	-- "TACTICALRIFLE",
 
 local globalWeaponTable = {
-    {
-        name = "Melee",
-        { 'WEAPON_KNUCKLE', 'Knuckle Dusters' },
-        { 'WEAPON_SWITCHBLADE', 'Switchblade' },
-        { 'WEAPON_KNIFE', 'Knife' },
-        { 'WEAPON_NIGHTSTICK', 'Nightstick' },
-        { 'WEAPON_HAMMER', 'Hammer' },
-        { 'WEAPON_BAT', 'Katana' },
-        { 'WEAPON_GOLFCLUB', 'Golf Club' },
-        { 'WEAPON_CROWBAR', 'Knife' },
-        { 'WEAPON_HATCHET', 'Hatchet' },
-        { 'WEAPON_POOLCUE', 'Pool Cue' },
-        { 'WEAPON_WRENCH', 'Wrench' },
-        { 'WEAPON_FLASHLIGHT', 'Flashlight' },
-        { 'WEAPON_BOTTLE', 'Broken Bottle' },
-        { 'WEAPON_DAGGER', 'Bowie Knife' },
-        { 'WEAPON_MACHETE', 'Machete' },
-        { 'WEAPON_BATTLEAXE', 'Battle Axe' },
-        { 'WEAPON_BALL', 'Baseball' },
-        { 'WEAPON_SNOWBALL', 'Snowball' },
-    },
-    {
-        name = "Pistols",
-        { 'WEAPON_PISTOL', 'Pistol' },
-        { 'WEAPON_PISTOL_MK2', 'Pistol MKII' },
-        { 'WEAPON_COMBATPISTOL', 'Combat Pistol' },
-        { 'WEAPON_MACHINEPISTOL', 'Machine Pistol' },
-        { 'WEAPON_APPISTOL', 'Automatic Pistol' },
-        { 'WEAPON_PISTOL50', 'Pistol .50' },
-        { 'WEAPON_REVOLVER', 'Revolver' },
-        { 'WEAPON_REVOLVER_MK2', 'Revolver MKII' },
-        { 'WEAPON_VINTAGEPISTOL', 'Vintage Pistol' },
+	{
+		name = "Melee",
+		{ 'WEAPON_KNUCKLE', 'Knuckle Dusters' },
+		{ 'WEAPON_SWITCHBLADE', 'Switchblade' },
+		{ 'WEAPON_KNIFE', 'Knife' },
+		{ 'WEAPON_NIGHTSTICK', 'Nightstick' },
+		{ 'WEAPON_HAMMER', 'Hammer' },
+		{ 'WEAPON_BAT', 'Katana' },
+		{ 'WEAPON_GOLFCLUB', 'Golf Club' },
+		{ 'WEAPON_CROWBAR', 'Knife' },
+		{ 'WEAPON_HATCHET', 'Hatchet' },
+		{ 'WEAPON_POOLCUE', 'Pool Cue' },
+		{ 'WEAPON_WRENCH', 'Wrench' },
+		{ 'WEAPON_FLASHLIGHT', 'Flashlight' },
+		{ 'WEAPON_BOTTLE', 'Broken Bottle' },
+		{ 'WEAPON_DAGGER', 'Bowie Knife' },
+		{ 'WEAPON_MACHETE', 'Machete' },
+		{ 'WEAPON_BATTLEAXE', 'Battle Axe' },
+		{ 'WEAPON_BALL', 'Baseball' },
+		{ 'WEAPON_SNOWBALL', 'Snowball' },
+	},
+	{
+		name = "Pistols",
+		{ 'WEAPON_PISTOL', 'Pistol' },
+		{ 'WEAPON_PISTOL_MK2', 'Pistol MKII' },
+		{ 'WEAPON_COMBATPISTOL', 'Combat Pistol' },
+		{ 'WEAPON_MACHINEPISTOL', 'Machine Pistol' },
+		{ 'WEAPON_APPISTOL', 'Automatic Pistol' },
+		{ 'WEAPON_PISTOL50', 'Pistol .50' },
+		{ 'WEAPON_REVOLVER', 'Revolver' },
+		{ 'WEAPON_REVOLVER_MK2', 'Revolver MKII' },
+		{ 'WEAPON_VINTAGEPISTOL', 'Vintage Pistol' },
 		{ 'WEAPON_CERAMICPISTOL', 'Ceramic Pistol' },
-        { 'WEAPON_SNSPISTOL', 'SNS Pistol' },
-        { 'WEAPON_SNSPISTOL_MK2', 'SNS Pistol MKII' },
-        { 'WEAPON_MARKSMANPISTOL', 'Marksman Pistol' },
-        { 'WEAPON_HEAVYPISTOL', 'Heavy Pistol' },
-        { 'WEAPON_FLAREGUN', 'Flare Gun' },
-        { 'WEAPON_STUNGUN', 'Taser' },
-        { 'WEAPON_DOUBLEACTION', 'Double-Action Revolver' },
-    },
-    {
-        name = "SMGs",
-        { 'WEAPON_MICROSMG', 'Micro SMG' },
-        { 'WEAPON_SMG', 'SMG' },
-        { 'WEAPON_SMG_MK2', 'SMG MKII' },
-        { 'WEAPON_ASSAULTSMG', 'Assault SMG' },
-        { 'WEAPON_MINISMG', 'Mini SMG' },
-        { 'WEAPON_COMBATPDW', 'Combat PDW' },
-    },
-    {
-        name = "MGs",
-        { 'WEAPON_MG', 'MG' },
-        { 'WEAPON_COMBATMG', 'Combat MG' },
-        { 'WEAPON_COMBATMG_MK2', 'Combat MG MKII' },
-        { 'WEAPON_GUSENBERG', 'Gusenberg' },
-    },
-    {
-        name = "Shotguns",
-        { 'WEAPON_PUMPSHOTGUN', 'Pump Shotgun' },
-        { 'WEAPON_PUMPSHOTGUN_MK2', 'Pump Shotgun MKII' },
-        { 'WEAPON_HEAVYSHOTGUN', 'Heavy Shotgun' },
-        { 'WEAPON_SAWNOFFSHOTGUN', 'Sawn-off Shotgun' },
-        { 'WEAPON_ASSAULTSHOTGUN', 'Assault Shotgun' },
-        { 'WEAPON_BULLPUPSHOTGUN', 'Bullpup Shotgun' },
+		{ 'WEAPON_SNSPISTOL', 'SNS Pistol' },
+		{ 'WEAPON_SNSPISTOL_MK2', 'SNS Pistol MKII' },
+		{ 'WEAPON_MARKSMANPISTOL', 'Marksman Pistol' },
+		{ 'WEAPON_HEAVYPISTOL', 'Heavy Pistol' },
+		{ 'WEAPON_FLAREGUN', 'Flare Gun' },
+		{ 'WEAPON_STUNGUN', 'Taser' },
+		{ 'WEAPON_DOUBLEACTION', 'Double-Action Revolver' },
+	},
+	{
+		name = "SMGs",
+		{ 'WEAPON_MICROSMG', 'Micro SMG' },
+		{ 'WEAPON_SMG', 'SMG' },
+		{ 'WEAPON_SMG_MK2', 'SMG MKII' },
+		{ 'WEAPON_ASSAULTSMG', 'Assault SMG' },
+		{ 'WEAPON_MINISMG', 'Mini SMG' },
+		{ 'WEAPON_COMBATPDW', 'Combat PDW' },
+	},
+	{
+		name = "MGs",
+		{ 'WEAPON_MG', 'MG' },
+		{ 'WEAPON_COMBATMG', 'Combat MG' },
+		{ 'WEAPON_COMBATMG_MK2', 'Combat MG MKII' },
+		{ 'WEAPON_GUSENBERG', 'Gusenberg' },
+	},
+	{
+		name = "Shotguns",
+		{ 'WEAPON_PUMPSHOTGUN', 'Pump Shotgun' },
+		{ 'WEAPON_PUMPSHOTGUN_MK2', 'Pump Shotgun MKII' },
+		{ 'WEAPON_HEAVYSHOTGUN', 'Heavy Shotgun' },
+		{ 'WEAPON_SAWNOFFSHOTGUN', 'Sawn-off Shotgun' },
+		{ 'WEAPON_ASSAULTSHOTGUN', 'Assault Shotgun' },
+		{ 'WEAPON_BULLPUPSHOTGUN', 'Bullpup Shotgun' },
 		{ 'WEAPON_COMBATSHOTGUN', 'Combat Shotgun' },
-        { 'WEAPON_AUTOSHOTGUN', 'Sweeper' },
-        { 'WEAPON_DBSHOTGUN', 'Double-Barreled Shotgun' },
-        { 'WEAPON_MUSKET', 'Musket' },
-    },
-    {
-        name = "Assault Rifles",
-        { 'WEAPON_ASSAULTRIFLE', 'Assault Rifle' },
-        { 'WEAPON_ASSAULTRIFLE_MK2', 'Assault Rifle MKII' },
-        { 'WEAPON_CARBINERIFLE', 'Carbine Rifle' },
-        { 'WEAPON_CARBINERIFLE_MK2', 'Carbine Rifle MKII' },
-        { 'WEAPON_ADVANCEDRIFLE', 'Advanced Rifle' },
-        { 'WEAPON_COMPACTRIFLE', 'Compact Rifle' },
-        { 'WEAPON_SPECIALCARBINE', 'Special Carbine' },
-        { 'WEAPON_SPECIALCARBINE_MK2', 'Special Carbine MKII' },
-        { 'WEAPON_BULLPUPRIFLE', 'Bullpup Rifle' },
-        { 'WEAPON_BULLPUPRIFLE_MK2', 'Bullpup Rifle MKII' },
+		{ 'WEAPON_AUTOSHOTGUN', 'Sweeper' },
+		{ 'WEAPON_DBSHOTGUN', 'Double-Barreled Shotgun' },
+		{ 'WEAPON_MUSKET', 'Musket' },
+	},
+	{
+		name = "Assault Rifles",
+		{ 'WEAPON_ASSAULTRIFLE', 'Assault Rifle' },
+		{ 'WEAPON_ASSAULTRIFLE_MK2', 'Assault Rifle MKII' },
+		{ 'WEAPON_CARBINERIFLE', 'Carbine Rifle' },
+		{ 'WEAPON_CARBINERIFLE_MK2', 'Carbine Rifle MKII' },
+		{ 'WEAPON_ADVANCEDRIFLE', 'Advanced Rifle' },
+		{ 'WEAPON_COMPACTRIFLE', 'Compact Rifle' },
+		{ 'WEAPON_SPECIALCARBINE', 'Special Carbine' },
+		{ 'WEAPON_SPECIALCARBINE_MK2', 'Special Carbine MKII' },
+		{ 'WEAPON_BULLPUPRIFLE', 'Bullpup Rifle' },
+		{ 'WEAPON_BULLPUPRIFLE_MK2', 'Bullpup Rifle MKII' },
 		{ 'WEAPON_MILITARYRIFLE', 'Military Rifle' },
 		{ 'WEAPON_HEAVYRIFLE', 'Heavy Rifle' },
 		{ 'WEAPON_TACTICALRIFLE', 'Service Carbine' },
-    },
-    {
-        name = "Sniper Rifles",
-        { 'WEAPON_SNIPERRIFLE', 'Sniper Rifle' },
-        { 'WEAPON_HEAVYSNIPER', 'Heavy Sniper Rifle' },
-        { 'WEAPON_HEAVYSNIPER_MK2', 'Heavy Sniper Rifle MKII' },
-        { 'WEAPON_MARKSMANRIFLE', 'Marksman Rifle' },
-        { 'WEAPON_MARKSMANRIFLE_MK2', 'Marksman Rifle MKII' },
-        { 'WEAPON_PRECISIONRIFLE', 'Precision Rifle' },
-    },
-    {
-        name = "Special Weapons",
-        { 'WEAPON_COMPACTLAUNCHER', 'Compact Grenade Launcher' },
-        { 'WEAPON_GRENADELAUNCHER', 'Grenade Launcher' },
-        { 'WEAPON_RPG', 'RPG' },
-        { 'WEAPON_HOMINGLAUNCHER', 'Homing Launcher' },
-        { 'WEAPON_MINIGUN', 'Minigun' },
-        { 'WEAPON_RAILGUN', 'Railgun' },
+	},
+	{
+		name = "Sniper Rifles",
+		{ 'WEAPON_SNIPERRIFLE', 'Sniper Rifle' },
+		{ 'WEAPON_HEAVYSNIPER', 'Heavy Sniper Rifle' },
+		{ 'WEAPON_HEAVYSNIPER_MK2', 'Heavy Sniper Rifle MKII' },
+		{ 'WEAPON_MARKSMANRIFLE', 'Marksman Rifle' },
+		{ 'WEAPON_MARKSMANRIFLE_MK2', 'Marksman Rifle MKII' },
+		{ 'WEAPON_PRECISIONRIFLE', 'Precision Rifle' },
+	},
+	{
+		name = "Special Weapons",
+		{ 'WEAPON_COMPACTLAUNCHER', 'Compact Grenade Launcher' },
+		{ 'WEAPON_GRENADELAUNCHER', 'Grenade Launcher' },
+		{ 'WEAPON_RPG', 'RPG' },
+		{ 'WEAPON_HOMINGLAUNCHER', 'Homing Launcher' },
+		{ 'WEAPON_MINIGUN', 'Minigun' },
+		{ 'WEAPON_RAILGUN', 'Railgun' },
 		{ 'WEAPON_MUSKET', 'Musket' },
-    },
-    {
-        name = "Throwables",
-        { 'WEAPON_GRENADE', 'Frag Grenade', {noTint = true} },
-        { 'WEAPON_STICKYBOMB', 'Sticky Bombs', {noTint = true} },
-        { 'WEAPON_SMOKEGRENADE', 'Smoke Grenade', {noTint = true} },
-        { 'WEAPON_BZGAS', 'BZ Gas', {noTint = true} },
-        { 'WEAPON_MOLOTOV', 'Molotov Cocktail', {noTint = true} },
-        { 'WEAPON_PIPEBOMB', 'Pipebomb', {noTint = true} },
-        { 'WEAPON_PROXMINE', 'Proximity Mine', {noTint = true} },
-    },
-    {
-        name = "Accessories",
-        -- { 'WEAPON_FIREEXTINGUISHER', 'Fire Extinguisher', {noAmmo = true, noTint = true} },
-        { 'WEAPON_FIREWORK', 'Firework Launcher', {noTint = true} },
-        { 'WEAPON_PETROLCAN', 'Jerry Can', {noTint = true} },
+	},
+	{
+		name = "Throwables",
+		{ 'WEAPON_GRENADE', 'Frag Grenade', {noTint = true} },
+		{ 'WEAPON_STICKYBOMB', 'Sticky Bombs', {noTint = true} },
+		{ 'WEAPON_SMOKEGRENADE', 'Smoke Grenade', {noTint = true} },
+		{ 'WEAPON_BZGAS', 'BZ Gas', {noTint = true} },
+		{ 'WEAPON_MOLOTOV', 'Molotov Cocktail', {noTint = true} },
+		{ 'WEAPON_PIPEBOMB', 'Pipebomb', {noTint = true} },
+		{ 'WEAPON_PROXMINE', 'Proximity Mine', {noTint = true} },
+	},
+	{
+		name = "Accessories",
+		-- { 'WEAPON_FIREEXTINGUISHER', 'Fire Extinguisher', {noAmmo = true, noTint = true} },
+		{ 'WEAPON_FIREWORK', 'Firework Launcher', {noTint = true} },
+		{ 'WEAPON_PETROLCAN', 'Jerry Can', {noTint = true} },
 		{ 'WEAPON_FLARE', 'Flare', {noTint = true} },
 		{ 'GADGET_PARACHUTE', 'Parachute', {noPreview = true, noTint = true, noAmmo = true} },
-    },
+	},
 }
 local globalAttachmentTable = {  
 	-- Putting these at the top makes them work properly as they need to be applied to the weapon first before other attachments
@@ -574,12 +574,12 @@ local globalTintTable = {
 	}
 }
 for ci,wepTable in pairs(globalWeaponTable) do
-    local className = wepTable.name
-    xnWeapons.weaponClasses[ci] = {
-        name = className,
-        weapons = {},
-    }
-    local classWepTable = xnWeapons.weaponClasses[ci].weapons
+	local className = wepTable.name
+	xnWeapons.weaponClasses[ci] = {
+		name = className,
+		weapons = {},
+	}
+	local classWepTable = xnWeapons.weaponClasses[ci].weapons
 	for wi,weaponObject in ipairs(wepTable) do
 		if weaponObject[3] then
 			classWepTable[wi] = weaponObject[3]
@@ -593,18 +593,18 @@ for ci,wepTable in pairs(globalWeaponTable) do
 				attachments = {},
 			}
 		end
-        local wep = classWepTable[wi]
-        for _,attachmentObject in ipairs(globalAttachmentTable) do
-            if DoesWeaponTakeWeaponComponent(weaponObject[1], attachmentObject[1]) then
-                wep.attachments[#wep.attachments+1] = {
-                    name = attachmentObject[2],
-                    model = attachmentObject[1]
-                }
-            end
-        end
+		local wep = classWepTable[wi]
+		for _,attachmentObject in ipairs(globalAttachmentTable) do
+			if DoesWeaponTakeWeaponComponent(weaponObject[1], attachmentObject[1]) then
+				wep.attachments[#wep.attachments+1] = {
+					name = attachmentObject[2],
+					model = attachmentObject[1]
+				}
+			end
+		end
 		wep.clipSize = wep.clipSize or GetWeaponClipSize(weaponObject[1])
 		wep.isMK2 = wep.isMK2 or (string.find(weaponObject[1], "_MK2") ~= nil)
-    end
+	end
 end
 -- We do this once so that we don't run like 500 tests a tick on weapons and all the information is easily available to the menu
 
@@ -619,8 +619,8 @@ end
 
 -- Main logic/magic loop
 Citizen.CreateThread(function()
-    local radius = 1.0  
-    local waitForPlayerToLeave = false
+	local radius = 1.0  
+	local waitForPlayerToLeave = false
 
 	while true do Citizen.Wait(1)
 		if GetInteriorFromEntity(GetPlayerPed(-1)) ~= 0 and xnWeapons.interiorIDs[GetInteriorFromEntity(GetPlayerPed(-1))] then
@@ -630,14 +630,14 @@ Citizen.CreateThread(function()
 				additionalOffset = xnWeapons.interiorIDs[interiorID].additionalOffset or additionalOffset
 			end
 
-            for i = 1,3 do
-                if not IsAmmunationOpen() then
-                    if (Vdist2(GetOffsetFromInteriorInWorldCoords(interiorID, (2.0-i),6.0,1.0) + additionalOffset, GetEntityCoords(PlayerPedId()))^2 <= radius^2) then
-                        if not waitForPlayerToLeave then
-                            BeginTextCommandDisplayHelp("GS_BROWSE_W")
-                                AddTextComponentSubstringPlayerName("~INPUT_CONTEXT~")
-                            EndTextCommandDisplayHelp(0, 0, true, -1)
-                            if IsControlJustReleased(0, 51) then
+			for i = 1,3 do
+				if not IsAmmunationOpen() then
+					if (Vdist2(GetOffsetFromInteriorInWorldCoords(interiorID, (2.0-i),6.0,1.0) + additionalOffset, GetEntityCoords(PlayerPedId()))^2 <= radius^2) then
+						if not waitForPlayerToLeave then
+							BeginTextCommandDisplayHelp("GS_BROWSE_W")
+								AddTextComponentSubstringPlayerName("~INPUT_CONTEXT~")
+							EndTextCommandDisplayHelp(0, 0, true, -1)
+							if IsControlJustReleased(0, 51) then
 								SetPlayerControl(PlayerId(), false)
 
 								local additionalCameraOffset = vec(0,0,0)
@@ -660,28 +660,28 @@ Citizen.CreateThread(function()
 								JayMenu.OpenMenu("xnweapons")
 
 								waitForPlayerToLeave = true
-                            end
-                        end
-                    else
-                        if waitForPlayerToLeave then waitForPlayerToLeave = false end
+							end
+						end
+					else
+						if waitForPlayerToLeave then waitForPlayerToLeave = false end
 					end
 				end
 			end
 			additionalOffset = nil
 			interiorID = nil
 		end
-    end
+	end
 end)
 
 local function IsWeaponMK2(weaponModel)
-    return string.find(weaponModel, "_MK2")
+	return string.find(weaponModel, "_MK2")
 end
 local function DoesPlayerOwnWeapon(weaponModel)
-    return HasPedGotWeapon(GetPlayerPed(-1), weaponModel, 0)
+	return HasPedGotWeapon(GetPlayerPed(-1), weaponModel, 0)
 end
 
 local function DoesPlayerWeaponHaveComponent(weaponModel, componentModel)
-    return (DoesPlayerOwnWeapon(weaponModel) and HasPedGotWeaponComponent(GetPlayerPed(-1), weaponModel, componentModel) or false)
+	return (DoesPlayerOwnWeapon(weaponModel) and HasPedGotWeaponComponent(GetPlayerPed(-1), weaponModel, componentModel) or false)
 end
 
 local function IsPlayerWeaponTintActive(weaponModel, tint)
@@ -788,23 +788,23 @@ local function SetTempWeaponConfig(weapon, component, tint)
 end
 
 local function GiveWeapon(weaponhash, weaponammo)
-    GiveWeaponToPed(GetPlayerPed(-1), weaponhash, weaponammo, false, true)
+	GiveWeaponToPed(GetPlayerPed(-1), weaponhash, weaponammo, false, true)
 	SetPedAmmoByType(GetPlayerPed(-1), GetPedAmmoTypeFromWeapon_2(GetPlayerPed(-1), weaponhash), weaponammo)
 end
 
 local function GiveAmmo(weaponHash, ammo)
-    AddAmmoToPed(GetPlayerPed(-1), weaponHash, ammo)
+	AddAmmoToPed(GetPlayerPed(-1), weaponHash, ammo)
 end
 
 local function GiveMaxAmmo(weaponHash)
 	local gotMaxAmmo, maxAmmo = GetMaxAmmo(GetPlayerPed(-1), weaponHash)
 	if not gotMaxAmmo then maxAmmo = 99999 end
 	SetAmmoInClip(GetPlayerPed(-1), weaponHash, GetWeaponClipSize(weaponHash))
-    AddAmmoToPed(GetPlayerPed(-1), weaponHash, maxAmmo) 
+	AddAmmoToPed(GetPlayerPed(-1), weaponHash, maxAmmo) 
 end
 
 local function RemoveWeapon(weaponhash)
-    RemoveWeaponFromPed(GetPlayerPed(-1), weaponhash)
+	RemoveWeaponFromPed(GetPlayerPed(-1), weaponhash)
 end
 
 local function GiveComponent(weaponname, componentname, weapon)
@@ -888,7 +888,7 @@ end
 
 
 Citizen.CreateThread(function()
-    JayMenu.CreateMenu("xnweapons", "Ammunation", function()
+	JayMenu.CreateMenu("xnweapons", "Ammunation", function()
 		SetPlayerControl(PlayerId(), true)
 		SetCamActive(cam, false)
 		RenderScriptCams(false, 1, 600, 300, 300)
@@ -896,24 +896,24 @@ Citizen.CreateThread(function()
 		SetPedDropsWeaponsWhenDead(GetPlayerPed(-1), false)
 		SaveWeapons() -- Once they exit the store, save their inventory
 		ReleaseWeaponModels()
-        return true
-    end)
+		return true
+	end)
 	JayMenu.SetSubTitle('xnweapons', "Weapons")
 
 	JayMenu.CreateSubMenu("xnweapons_removeall_confirm","xnweapons","Are you sure?")
 
-    for i,class in ipairs(xnWeapons.weaponClasses) do -- Create all menus for all weapons programatically
+	for i,class in ipairs(xnWeapons.weaponClasses) do -- Create all menus for all weapons programatically
 		JayMenu.CreateSubMenu("xnw_"..class.name, "xnweapons", class.name, function() 
 			if DoesEntityExist(xnWeapons.fakeWeaponObject) then DeleteObject(xnWeapons.fakeWeaponObject) end
 			return true
 		end)
 
-        for i,weapon in ipairs(class.weapons) do
+		for i,weapon in ipairs(class.weapons) do
 			JayMenu.CreateSubMenu("xnw_"..class.name.."_"..weapon.model, "xnw_"..class.name, weapon.name, function() 
 				SetTempWeaponConfig(weapon, false, false)
 				return true
 			end)
-        end
+		end
 	end
 	
 	while true do Citizen.Wait(0)
@@ -1045,7 +1045,7 @@ Citizen.CreateThread(function()
 				JayMenu.CloseMenu()
 			end
 		end
-    end
+	end
 end)
 
 SetPlayerControl(PlayerId(), true)
