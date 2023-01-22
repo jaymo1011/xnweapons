@@ -622,9 +622,9 @@ Citizen.CreateThread(function()
 	local radius = 1.0  
 	local waitForPlayerToLeave = false
 
-	while true do Citizen.Wait(1)
-		if GetInteriorFromEntity(GetPlayerPed(-1)) ~= 0 and xnWeapons.interiorIDs[GetInteriorFromEntity(GetPlayerPed(-1))] then
-			local interiorID = GetInteriorFromEntity(GetPlayerPed(-1))
+	while true do Wait(0)
+		if GetInteriorFromEntity(PlayerPedId()) ~= 0 and xnWeapons.interiorIDs[GetInteriorFromEntity(PlayerPedId())] then
+			local interiorID = GetInteriorFromEntity(PlayerPedId())
 			local additionalOffset = vec(0,0,0)
 			if type(xnWeapons.interiorIDs[interiorID]) == "table" then
 				additionalOffset = xnWeapons.interiorIDs[interiorID].additionalOffset or additionalOffset
@@ -632,10 +632,10 @@ Citizen.CreateThread(function()
 
 			for i = 1,3 do
 				if not IsAmmunationOpen() then
-					if (Vdist2(GetOffsetFromInteriorInWorldCoords(interiorID, (2.0-i),6.0,1.0) + additionalOffset, GetEntityCoords(PlayerPedId()))^2 <= radius^2) then
+					if (#(GetOffsetFromInteriorInWorldCoords(interiorID, (2.0-i),6.0,1.0) + additionalOffset - GetEntityCoords(PlayerPedId()))^2 <= radius^2) then
 						if not waitForPlayerToLeave then
 							BeginTextCommandDisplayHelp("GS_BROWSE_W")
-								AddTextComponentSubstringPlayerName("~INPUT_CONTEXT~")
+							AddTextComponentSubstringPlayerName("~INPUT_CONTEXT~")
 							EndTextCommandDisplayHelp(0, 0, true, -1)
 							if IsControlJustReleased(0, 51) then
 								SetPlayerControl(PlayerId(), false)
@@ -655,7 +655,7 @@ Citizen.CreateThread(function()
 								SetCamActive(cam, true)
 								RenderScriptCams(true, 1, 600, 300, 0)
 
-								Citizen.Wait(600)
+								Wait(600)
 
 								JayMenu.OpenMenu("xnweapons")
 
@@ -677,15 +677,15 @@ local function IsWeaponMK2(weaponModel)
 	return string.find(weaponModel, "_MK2")
 end
 local function DoesPlayerOwnWeapon(weaponModel)
-	return HasPedGotWeapon(GetPlayerPed(-1), weaponModel, 0)
+	return HasPedGotWeapon(PlayerPedId(), weaponModel, 0)
 end
 
 local function DoesPlayerWeaponHaveComponent(weaponModel, componentModel)
-	return (DoesPlayerOwnWeapon(weaponModel) and HasPedGotWeaponComponent(GetPlayerPed(-1), weaponModel, componentModel) or false)
+	return (DoesPlayerOwnWeapon(weaponModel) and HasPedGotWeaponComponent(PlayerPedId(), weaponModel, componentModel) or false)
 end
 
 local function IsPlayerWeaponTintActive(weaponModel, tint)
-	return (tint == GetPedWeaponTintIndex(GetPlayerPed(-1), weaponModel))
+	return (tint == GetPedWeaponTintIndex(PlayerPedId(), weaponModel))
 end
 
 Citizen.CreateThread(function()
@@ -698,9 +698,9 @@ Citizen.CreateThread(function()
 
 		local weaponWorldModel = GetWeapontypeModel(weapon.model)
 		RequestModel(weaponWorldModel)
-		while not HasModelLoaded(weaponWorldModel) do Citizen.Wait(0) end
+		while not HasModelLoaded(weaponWorldModel) do Wait(0) end
 		
-		local interiorID = GetInteriorFromEntity(GetPlayerPed(-1))
+		local interiorID = GetInteriorFromEntity(PlayerPedId())
 		local rotationOffset = 0.0
 		local additionalOffset = vec(0,0,0)
 		local additionalWeaponOffset = vec(0,0,0)
@@ -722,7 +722,7 @@ Citizen.CreateThread(function()
 				GiveWeaponComponentToWeaponObject(fakeWeapon, attach.model)
 			end
 		end
-		if DoesPlayerOwnWeapon(weapon.model) then SetWeaponObjectTintIndex(fakeWeapon, GetPedWeaponTintIndex(GetPlayerPed(-1), weapon.model)) end
+		if DoesPlayerOwnWeapon(weapon.model) then SetWeaponObjectTintIndex(fakeWeapon, GetPedWeaponTintIndex(PlayerPedId(), weapon.model)) end
 
 		if not keepOldWeapon then
 			SetEntityAlpha(fakeWeapon, 255)
@@ -766,17 +766,17 @@ local function SetTempWeaponConfig(weapon, component, tint)
 				tint = tint,
 			}
 			local fakeWeapon = CreateFakeWeaponObject(weapon, true)
-			Citizen.Wait(30)
+			Wait(30)
 			if currentTempWeaponConfig.component then
 				local attachWorldModel = GetWeaponComponentTypeModel(currentTempWeaponConfig.component)
 				RequestModel(attachWorldModel)
-				while not HasModelLoaded(attachWorldModel) do Citizen.Wait(0) end
+				while not HasModelLoaded(attachWorldModel) do Wait(0) end
 				GiveWeaponComponentToWeaponObject(fakeWeapon, currentTempWeaponConfig.component)
 			end
 			if currentTempWeaponConfig.tint then
 				SetWeaponObjectTintIndex(fakeWeapon, currentTempWeaponConfig.tint)
 			else
-				SetWeaponObjectTintIndex(fakeWeapon, GetPedWeaponTintIndex(GetPlayerPed(-1), weapon.model))
+				SetWeaponObjectTintIndex(fakeWeapon, GetPedWeaponTintIndex(PlayerPedId(), weapon.model))
 			end
 			
 			-- Wait until we have assigned all the attachments and shit before we actually override the current weapon preview
@@ -788,53 +788,53 @@ local function SetTempWeaponConfig(weapon, component, tint)
 end
 
 local function GiveWeapon(weaponhash, weaponammo)
-	GiveWeaponToPed(GetPlayerPed(-1), weaponhash, weaponammo, false, true)
-	SetPedAmmoByType(GetPlayerPed(-1), GetPedAmmoTypeFromWeapon_2(GetPlayerPed(-1), weaponhash), weaponammo)
+	GiveWeaponToPed(PlayerPedId(), weaponhash, weaponammo, false, true)
+	SetPedAmmoByType(PlayerPedId(), GetPedAmmoTypeFromWeapon_2(PlayerPedId(), weaponhash), weaponammo)
 end
 
 local function GiveAmmo(weaponHash, ammo)
-	AddAmmoToPed(GetPlayerPed(-1), weaponHash, ammo)
+	AddAmmoToPed(PlayerPedId(), weaponHash, ammo)
 end
 
 local function GiveMaxAmmo(weaponHash)
-	local gotMaxAmmo, maxAmmo = GetMaxAmmo(GetPlayerPed(-1), weaponHash)
+	local gotMaxAmmo, maxAmmo = GetMaxAmmo(PlayerPedId(), weaponHash)
 	if not gotMaxAmmo then maxAmmo = 99999 end
-	SetAmmoInClip(GetPlayerPed(-1), weaponHash, GetWeaponClipSize(weaponHash))
-	AddAmmoToPed(GetPlayerPed(-1), weaponHash, maxAmmo) 
+	SetAmmoInClip(PlayerPedId(), weaponHash, GetWeaponClipSize(weaponHash))
+	AddAmmoToPed(PlayerPedId(), weaponHash, maxAmmo) 
 end
 
 local function RemoveWeapon(weaponhash)
-	RemoveWeaponFromPed(GetPlayerPed(-1), weaponhash)
+	RemoveWeaponFromPed(PlayerPedId(), weaponhash)
 end
 
 local function GiveComponent(weaponname, componentname, weapon)
-	GiveWeaponComponentToPed(GetPlayerPed(-1), weaponname, componentname)
+	GiveWeaponComponentToPed(PlayerPedId(), weaponname, componentname)
 	CreateFakeWeaponObject(weapon)
 end
 
 local function RemoveComponent(weaponname, componentname, weapon)
-	RemoveWeaponComponentFromPed(GetPlayerPed(-1), weaponname, componentname)
+	RemoveWeaponComponentFromPed(PlayerPedId(), weaponname, componentname)
 	CreateFakeWeaponObject(weapon)
 end
 
 local function SetPlayerWeaponTint(weaponname, tint, weapon)
-	SetPedWeaponTintIndex(GetPlayerPed(-1), weaponname, tint)
+	SetPedWeaponTintIndex(PlayerPedId(), weaponname, tint)
 	CreateFakeWeaponObject(weapon)
 end
 
 -- Weapon Saving
 local weaponsCanSave = false -- prevent weapons from saving before they are loaded
 Citizen.CreateThread(function()
-	while GetIsLoadingScreenActive() and not PlayerPedId() do Citizen.Wait(0) end
+	while GetIsLoadingScreenActive() and not PlayerPedId() do Wait(0) end
 
 	if GetConvar("xnw_enableWeaponSaving", true) then
 		local loadedWeapons = json.decode(GetResourceKvpString("xnAmmunation:weapons") or "[]")
 		for i,weapon in ipairs(loadedWeapons) do
-			GiveWeaponToPed(GetPlayerPed(-1), weapon.model, 0, false, true)
+			GiveWeaponToPed(PlayerPedId(), weapon.model, 0, false, true)
 			for i,attach in ipairs(weapon.attachments) do
-				GiveWeaponComponentToPed(GetPlayerPed(-1), weapon.model, attach.model)
+				GiveWeaponComponentToPed(PlayerPedId(), weapon.model, attach.model)
 			end
-			SetPedWeaponTintIndex(GetPlayerPed(-1), weapon.model, weapon.tint)
+			SetPedWeaponTintIndex(PlayerPedId(), weapon.model, weapon.tint)
 			GiveAmmo(weapon.model, weapon.ammo)
 		end
 		SetPedCurrentWeaponVisible(PlayerPedId(), false, true)
@@ -850,8 +850,8 @@ local function SaveWeapons()
 				if DoesPlayerOwnWeapon(weapon.model) then -- Construct weapons for saving
 					local savedweapon = {
 						model = weapon.model,
-						tint = GetPedWeaponTintIndex(GetPlayerPed(-1), weapon.model),
-						ammo = GetAmmoInPedWeapon(GetPlayerPed(-1), weapon.model),
+						tint = GetPedWeaponTintIndex(PlayerPedId(), weapon.model),
+						ammo = GetAmmoInPedWeapon(PlayerPedId(), weapon.model),
 						attachments = {},
 					}
 					for i,attach in ipairs(weapon.attachments) do
@@ -868,7 +868,7 @@ local function SaveWeapons()
 end
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(30000)
+		Wait(30000)
 		if weaponsCanSave then
 			SaveWeapons()
 		end
@@ -893,7 +893,7 @@ Citizen.CreateThread(function()
 		SetCamActive(cam, false)
 		RenderScriptCams(false, 1, 600, 300, 300)
 		if DoesEntityExist(xnWeapons.fakeWeaponObject) then DeleteObject(xnWeapons.fakeWeaponObject) end
-		SetPedDropsWeaponsWhenDead(GetPlayerPed(-1), false)
+		SetPedDropsWeaponsWhenDead(PlayerPedId(), false)
 		SaveWeapons() -- Once they exit the store, save their inventory
 		ReleaseWeaponModels()
 		return true
@@ -916,7 +916,7 @@ Citizen.CreateThread(function()
 		end
 	end
 	
-	while true do Citizen.Wait(0)
+	while true do Wait(0)
 		if IsAmmunationOpen() then
 			if JayMenu.IsMenuOpened('xnweapons') then
 				for i,class in ipairs(xnWeapons.weaponClasses) do
@@ -965,7 +965,7 @@ Citizen.CreateThread(function()
 						if DoesPlayerOwnWeapon(weapon.model) then -- If they have the weapon take them to the customisation menu, else let them buy it...
 							local clicked, hovered = JayMenu.SpriteMenuButton(weapon.name, "commonmenu", "shop_gunclub_icon_a", "shop_gunclub_icon_b", "xnw_"..class.name.."_"..weapon.model)
 							if clicked then
-								SetCurrentPedWeapon(GetPlayerPed(-1), weapon.model, true)
+								SetCurrentPedWeapon(PlayerPedId(), weapon.model, true)
 								CreateFakeWeaponObject(weapon)
 							elseif hovered then
 								SetTempWeapon(weapon)
@@ -974,7 +974,7 @@ Citizen.CreateThread(function()
 							local clicked, hovered = JayMenu.Button(weapon.name, "FREE")
 							if clicked then
 								GiveWeapon(weapon.model, weapon.clipSize*3)
-								SetCurrentPedWeapon(GetPlayerPed(-1), weapon.model, true)
+								SetCurrentPedWeapon(PlayerPedId(), weapon.model, true)
 								CreateFakeWeaponObject(weapon)
 								JayMenu.SwitchMenu("xnw_"..class.name.."_"..weapon.model)
 							elseif hovered then
