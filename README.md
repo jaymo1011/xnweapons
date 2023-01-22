@@ -1,5 +1,5 @@
 # xnweapons
-xnweapons
+xnweapons 1.1.1
 
 # Credits
 - Jaymo: made it
