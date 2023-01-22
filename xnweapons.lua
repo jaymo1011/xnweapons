@@ -688,51 +688,49 @@ local function IsPlayerWeaponTintActive(weaponModel, tint)
 	return (tint == GetPedWeaponTintIndex(PlayerPedId(), weaponModel))
 end
 
-Citizen.CreateThread(function()
-	function CreateFakeWeaponObject(weapon, keepOldWeapon)
-		if weapon.noPreview then
-			if DoesEntityExist(xnWeapons.fakeWeaponObject) then DeleteObject(xnWeapons.fakeWeaponObject) end
-			xnWeapons.fakeWeaponObject = false
-			return false 
-		end
-
-		local weaponWorldModel = GetWeapontypeModel(weapon.model)
-		RequestModel(weaponWorldModel)
-		while not HasModelLoaded(weaponWorldModel) do Wait(0) end
-		
-		local interiorID = GetInteriorFromEntity(PlayerPedId())
-		local rotationOffset = 0.0
-		local additionalOffset = vec(0,0,0)
-		local additionalWeaponOffset = vec(0,0,0)
-		if type(xnWeapons.interiorIDs[interiorID]) == "table" then
-			rotationOffset = xnWeapons.interiorIDs[interiorID].weaponRotationOffset or 0.0
-			additionalOffset = xnWeapons.interiorIDs[interiorID].additionalOffset or additionalOffset
-			additionalWeaponOffset = xnWeapons.interiorIDs[interiorID].additionalWeaponOffset or additionalWeaponOffset
-		end
-		local extraAdditionalWeaponOffset = weapon.offset or vec(0,0,0)
-
-		local fakeWeaponCoords = (GetOffsetFromInteriorInWorldCoords(interiorID, 4.0,6.25,2.0) + additionalOffset) + additionalWeaponOffset + extraAdditionalWeaponOffset
-		local fakeWeapon = CreateWeaponObject(weapon.model, weapon.clipSize*3, fakeWeaponCoords, true, 0.0)
-		SetEntityAlpha(fakeWeapon, 0)
-		SetEntityHeading(fakeWeapon, (GetCamRot(GetRenderingCam(), 1).z - 180)+rotationOffset)
-		SetEntityCoordsNoOffset(fakeWeapon, fakeWeaponCoords)
-
-		for i,attach in ipairs(weapon.attachments) do
-			if DoesPlayerWeaponHaveComponent(weapon.model, attach.model) then
-				GiveWeaponComponentToWeaponObject(fakeWeapon, attach.model)
-			end
-		end
-		if DoesPlayerOwnWeapon(weapon.model) then SetWeaponObjectTintIndex(fakeWeapon, GetPedWeaponTintIndex(PlayerPedId(), weapon.model)) end
-
-		if not keepOldWeapon then
-			SetEntityAlpha(fakeWeapon, 255)
-			if DoesEntityExist(xnWeapons.fakeWeaponObject) then DeleteObject(xnWeapons.fakeWeaponObject) end
-			xnWeapons.fakeWeaponObject = fakeWeapon
-		end
-
-		return fakeWeapon
+function CreateFakeWeaponObject(weapon, keepOldWeapon)
+	if weapon.noPreview then
+		if DoesEntityExist(xnWeapons.fakeWeaponObject) then DeleteObject(xnWeapons.fakeWeaponObject) end
+		xnWeapons.fakeWeaponObject = false
+		return false 
 	end
-end)
+
+	local weaponWorldModel = GetWeapontypeModel(weapon.model)
+	RequestModel(weaponWorldModel)
+	while not HasModelLoaded(weaponWorldModel) do Wait(0) end
+	
+	local interiorID = GetInteriorFromEntity(PlayerPedId())
+	local rotationOffset = 0.0
+	local additionalOffset = vec(0,0,0)
+	local additionalWeaponOffset = vec(0,0,0)
+	if type(xnWeapons.interiorIDs[interiorID]) == "table" then
+		rotationOffset = xnWeapons.interiorIDs[interiorID].weaponRotationOffset or 0.0
+		additionalOffset = xnWeapons.interiorIDs[interiorID].additionalOffset or additionalOffset
+		additionalWeaponOffset = xnWeapons.interiorIDs[interiorID].additionalWeaponOffset or additionalWeaponOffset
+	end
+	local extraAdditionalWeaponOffset = weapon.offset or vec(0,0,0)
+
+	local fakeWeaponCoords = (GetOffsetFromInteriorInWorldCoords(interiorID, 4.0,6.25,2.0) + additionalOffset) + additionalWeaponOffset + extraAdditionalWeaponOffset
+	local fakeWeapon = CreateWeaponObject(weapon.model, weapon.clipSize*3, fakeWeaponCoords, true, 0.0)
+	SetEntityAlpha(fakeWeapon, 0)
+	SetEntityHeading(fakeWeapon, (GetCamRot(GetRenderingCam(), 1).z - 180)+rotationOffset)
+	SetEntityCoordsNoOffset(fakeWeapon, fakeWeaponCoords)
+
+	for i,attach in ipairs(weapon.attachments) do
+		if DoesPlayerWeaponHaveComponent(weapon.model, attach.model) then
+			GiveWeaponComponentToWeaponObject(fakeWeapon, attach.model)
+		end
+	end
+	if DoesPlayerOwnWeapon(weapon.model) then SetWeaponObjectTintIndex(fakeWeapon, GetPedWeaponTintIndex(PlayerPedId(), weapon.model)) end
+
+	if not keepOldWeapon then
+		SetEntityAlpha(fakeWeapon, 255)
+		if DoesEntityExist(xnWeapons.fakeWeaponObject) then DeleteObject(xnWeapons.fakeWeaponObject) end
+		xnWeapons.fakeWeaponObject = fakeWeapon
+	end
+
+	return fakeWeapon
+end
 
 local currentTempWeapon = false
 local tempWeaponLocked = false
