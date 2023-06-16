@@ -99,6 +99,7 @@ local globalWeaponTable = {
 		{ 'WEAPON_ASSAULTSMG', 'Assault SMG' },
 		{ 'WEAPON_MINISMG', 'Mini SMG' },
 		{ 'WEAPON_COMBATPDW', 'Combat PDW' },
+		{ 'WEAPON_TECPISTOL', 'Tactical SMG' },
 	},
 	{
 		name = "MGs",
@@ -232,6 +233,7 @@ local globalAttachmentTable = {
 	{ "COMPONENT_SMG_CLIP_02", "Extended Magazine" },
 	{ "COMPONENT_SPECIALCARBINE_CLIP_02", "Extended Magazine" },
 	{ "COMPONENT_TACTICALRIFLE_CLIP_02", "Extended Magazine" },
+	{ "COMPONENT_TECPISTOL_CLIP_02", "Extended Magazine" },
 
 	{ "COMPONENT_SPECIALCARBINE_CLIP_03", "Drum Magazine" },
 	{ "COMPONENT_COMPACTRIFLE_CLIP_03", "Drum Magazine" },
